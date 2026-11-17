@@ -1,5 +1,5 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
-import type { Item } from '../types';
+import type { Entry, Item } from '../types';
 import { UNITS } from '../lib/format';
 import { load, save } from '../lib/storage';
 
@@ -21,6 +21,7 @@ export function useAppData() {
   const [expenses, setExpenses] = useState<Item[]>([]);
   const [assets, setAssets] = useState<Item[]>([]);
   const [assetUnit, setAssetUnit] = useState(10000);
+  const [ledger, setLedger] = useState<Entry[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export function useAppData() {
         setExpenses(d.expenses);
         setAssets(d.assets);
         setAssetUnit(d.assetUnit);
+        setLedger(d.ledger);
       }
       setLoaded(true);
     });
@@ -37,8 +39,8 @@ export function useAppData() {
 
   // 불러오기가 끝난 뒤에만 저장 (빈 값으로 덮어쓰기 방지)
   useEffect(() => {
-    if (loaded) save({ incomes, expenses, assets, assetUnit });
-  }, [incomes, expenses, assets, assetUnit, loaded]);
+    if (loaded) save({ incomes, expenses, assets, assetUnit, ledger });
+  }, [incomes, expenses, assets, assetUnit, ledger, loaded]);
 
   return {
     incomes,
@@ -49,5 +51,13 @@ export function useAppData() {
     incomeActions: listActions(setIncomes),
     expenseActions: listActions(setExpenses),
     assetActions: listActions(setAssets),
+    ledger,
+    ledgerActions: {
+      add: (date: string, type: Entry['type'], name: string, amount: number) =>
+        setLedger((prev) => [...prev, { id: Date.now(), date, type, name, amount }]),
+      remove: (id: number) => setLedger((prev) => prev.filter((e) => e.id !== id)),
+      update: (id: number, amount: number) =>
+        setLedger((prev) => prev.map((e) => (e.id === id ? { ...e, amount } : e))),
+    },
   };
 }

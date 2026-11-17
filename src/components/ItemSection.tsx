@@ -1,4 +1,4 @@
-import { useState, type KeyboardEvent } from 'react';
+import { useState, type KeyboardEvent, type ReactNode } from 'react';
 import type { Item, Unit } from '../types';
 import { UNITS, fmtUnit, sum } from '../lib/format';
 import { C, s } from '../styles/theme';
@@ -15,6 +15,7 @@ export default function ItemSection(props: {
   onRemove: (id: number) => void;
   onUpdate?: (id: number, amount: number) => void; // 있으면 목록에서 금액을 바로 수정
   unit?: Unit; // 입력·표시 단위 (저장은 원)
+  toolbar?: ReactNode; // 제목 위에 붙는 추가 UI (예: 지출/수입 전환)
 }) {
   const { title, items, color, colorSoft, sign, namePlaceholder, onAdd, onRemove, onUpdate } = props;
   const unit = props.unit ?? UNITS[0];
@@ -39,6 +40,7 @@ export default function ItemSection(props: {
 
   return (
     <section style={s.card}>
+      {props.toolbar}
       <div style={s.sectionHead}>
         <h2 style={s.sectionTitle}>{title}</h2>
         <span style={{ ...s.sectionTotal, color }}>{fmt(sum(items))}</span>

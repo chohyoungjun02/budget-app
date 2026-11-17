@@ -41,6 +41,17 @@ export const s: Record<string, CSSProperties> = {
   unitTabs: { display: 'flex', gap: 2, padding: 3, background: C.input, borderRadius: 10 },
   unitTab: { height: 30, padding: '0 10px', border: 'none', borderRadius: 8, background: 'transparent', color: C.sub, fontSize: 13, fontWeight: 600 },
 
+  calHead: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 },
+  calNav: { width: 36, height: 36, border: 'none', borderRadius: 10, background: C.input, color: C.sub, fontSize: 20, lineHeight: 1 },
+  calGrid: { display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: 2 },
+  calWeek: { textAlign: 'center', fontSize: 12, fontWeight: 600, padding: '4px 0' },
+  calCell: {
+    minHeight: 56, padding: '6px 0 4px', border: 'none', borderRadius: 10, background: 'transparent',
+    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, fontSize: 14, overflow: 'hidden',
+  },
+  calCellSel: { background: C.blueSoft },
+  calAmt: { fontSize: 9, fontWeight: 600, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+
   pie: { width: 200, height: 200, borderRadius: '50%', margin: '8px auto 20px' },
   legendRow: { display: 'flex', alignItems: 'center', gap: 10, padding: '6px 0', fontSize: 15 },
   dot: { width: 12, height: 12, borderRadius: 4, flexShrink: 0 },

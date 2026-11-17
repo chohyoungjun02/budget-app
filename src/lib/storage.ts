@@ -1,5 +1,5 @@
 import { Storage } from '@apps-in-toss/web-framework';
-import type { Data, Item } from '../types';
+import type { Data, Entry, Item } from '../types';
 import { UNITS } from './format';
 
 const KEY = 'budget-data';
@@ -24,7 +24,8 @@ export async function load(): Promise<Data | null> {
     const expenses: Item[] = Array.isArray(d.expenses) ? d.expenses : [];
     const assets: Item[] = Array.isArray(d.assets) ? d.assets : [];
     const assetUnit = UNITS.some((u) => u.mul === d.assetUnit) ? d.assetUnit : 10000;
-    return { incomes, expenses, assets, assetUnit };
+    const ledger: Entry[] = Array.isArray(d.ledger) ? d.ledger : [];
+    return { incomes, expenses, assets, assetUnit, ledger };
   } catch {
     return null;
   }

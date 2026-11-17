@@ -31,6 +31,7 @@ export default function BudgetPage(props: {
         namePlaceholder="항목 (예: 월급, 용돈, 부업)"
         onAdd={incomeActions.add}
         onRemove={incomeActions.remove}
+        onUpdate={incomeActions.update}
       />
 
       <ItemSection
@@ -42,6 +43,7 @@ export default function BudgetPage(props: {
         namePlaceholder="항목 (예: 월세, 통신비, 구독료)"
         onAdd={expenseActions.add}
         onRemove={expenseActions.remove}
+        onUpdate={expenseActions.update}
       />
     </>
   );

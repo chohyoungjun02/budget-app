@@ -1,8 +1,9 @@
 import { s } from '../styles/theme';
 
-export type Tab = 'budget' | 'portfolio';
+export type Tab = 'ledger' | 'budget' | 'portfolio';
 
 const TABS: [Tab, string][] = [
+  ['ledger', '가계부'],
   ['budget', '예산'],
   ['portfolio', '자산 포트폴리오'],
 ];

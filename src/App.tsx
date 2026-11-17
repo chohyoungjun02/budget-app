@@ -5,17 +5,22 @@ import TabBar, { type Tab } from './components/TabBar';
 import AdBanner from './components/AdBanner';
 import BudgetPage from './pages/BudgetPage';
 import PortfolioPage from './pages/PortfolioPage';
+import LedgerPage from './pages/LedgerPage';
 
 export default function App() {
   const data = useAppData();
-  const [tab, setTab] = useState<Tab>('budget');
+  const [tab, setTab] = useState<Tab>('ledger');
 
   return (
     <div style={s.page}>
       <style>{globalCss}</style>
       <TabBar tab={tab} onChange={setTab} />
 
-      {tab === 'portfolio' ? (
+      {tab === 'ledger' ? (
+        <LedgerPage ledger={data.ledger} onAdd={data.ledgerActions.add} onRemove={data.ledgerActions.remove}
+          onUpdate={data.ledgerActions.update}
+        />
+      ) : tab === 'portfolio' ? (
         <PortfolioPage
           assets={data.assets}
           assetActions={data.assetActions}
